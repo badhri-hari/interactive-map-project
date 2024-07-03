@@ -72,7 +72,7 @@ export default function App() {
             placeholder="Student ID"
             className="search-input"
             value={search.StudentId}
-            maxlength="4"
+            maxLength="4"
             onChange={(e) =>
               setSearch({
                 ...search,
