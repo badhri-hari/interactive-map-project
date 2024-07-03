@@ -24,9 +24,6 @@ export default function App() {
     try {
       const response = await axios.get("/api/students", {
         params: search,
-        headers: {
-          "x-api-key": process.env.REACT_APP_API_KEY,
-        },
       });
       const sortedStudents = response.data.sort((a, b) =>
         a.Name.localeCompare(b.Name)

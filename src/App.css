@@ -112,7 +112,20 @@ body::-webkit-scrollbar {
   margin-top: -18px;
 }
 
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  height: 114vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .loading-container {
+  position: absolute;
+  top: 30%;
+  left: 36.5%;
   display: flex;
   background-color: darkslategray;
   padding: 80px;
