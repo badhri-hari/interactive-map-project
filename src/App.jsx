@@ -19,12 +19,11 @@ export default function App() {
   const [error, setError] = useState(false);
   const firstStudentRef = useRef(null);
 
-  const handleSearch = async () => {
+  const fetchStudents = async (params = {}) => {
     setLoading(true);
     try {
-      const response = await axios.get("/api/students", {
-        params: search,
-      });
+      console.log("Fetching students with params:", params);
+      const response = await axios.get("/api/students", { params });
       const sortedStudents = response.data.sort((a, b) =>
         a.Name.localeCompare(b.Name)
       );
@@ -35,6 +34,14 @@ export default function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    fetchStudents(); // Fetch all students initially
+  }, []);
+
+  const handleSearch = () => {
+    fetchStudents(search);
   };
 
   const formatStudentId = (value) => {

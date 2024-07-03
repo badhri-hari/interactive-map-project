@@ -39,6 +39,7 @@ export default async (req, res) => {
   }
 
   try {
+    console.log("Connecting to database...");
     const client = await connectToDatabase();
     const db = client.db(dbName);
     const collection = db.collection("School_Transport");
@@ -57,7 +58,9 @@ export default async (req, res) => {
       query.Area = { $regex: new RegExp(`^${req.query.Area}`, "i") };
     }
 
+    console.log("Fetching students with query:", query);
     const students = await collection.find(query).toArray();
+    console.log("Students fetched successfully");
     res.status(200).json(students);
   } catch (err) {
     console.error("Error fetching data:", err);
