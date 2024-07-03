@@ -36,7 +36,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchStudents(); // Fetch all students initially
+    fetchStudents();
   }, []);
 
   const handleSearch = () => {
@@ -44,17 +44,17 @@ export default function App() {
   };
 
   const formatStudentId = (value) => {
-    const cleanValue = value.replace(/[^a-zA-Z0-9]/g, "");
+    const cleanValue = value
+      .replace(/[^a-zA-Z0-9]/g, "")
+      .substring(0, 4)
+      .toUpperCase();
     let formattedValue = "";
 
     if (cleanValue.length > 0) {
-      formattedValue += cleanValue.substring(0, 2).toUpperCase();
+      formattedValue += cleanValue.substring(0, 2);
     }
     if (cleanValue.length > 2) {
-      formattedValue += "-" + cleanValue.substring(2, 4);
-    }
-    if (cleanValue.length > 4) {
-      formattedValue += "-" + cleanValue.substring(4, 7);
+      formattedValue += cleanValue.substring(2, 4);
     }
 
     return formattedValue;
@@ -72,6 +72,7 @@ export default function App() {
             placeholder="Student ID"
             className="search-input"
             value={search.StudentId}
+            maxlength="4"
             onChange={(e) =>
               setSearch({
                 ...search,
