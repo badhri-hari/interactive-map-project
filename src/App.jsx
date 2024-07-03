@@ -37,7 +37,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchStudents(); // Fetch all students initially
+    fetchStudents();
   }, []);
 
   const handleSearch = () => {
@@ -62,7 +62,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    if (students.length > 0) {
+    if (students.length > 0 && firstStudentRef.current) {
       firstStudentRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [students]);
@@ -138,6 +138,7 @@ export default function App() {
                 <Marker
                   key={index}
                   position={[student.latitude, student.longitude]}
+                  ref={index === 0 ? firstStudentRef : null}
                 >
                   <Popup>
                     <div className="popup-intro-container">
