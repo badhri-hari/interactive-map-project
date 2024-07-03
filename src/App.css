@@ -1,0 +1,128 @@
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: antiquewhite;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.intro-container {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  width: 90vw;
+  margin-bottom: 18px;
+  border-radius: 5px;
+  background-color: darkslategray;
+}
+
+.error-message {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: red;
+  margin-top: 8px;
+  padding: 7px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  background-color: antiquewhite;
+}
+
+.search-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 5px solid darkslategray;
+  border-radius: 5px;
+  background-color: darkslategray;
+}
+
+.search-container > div {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: small;
+  margin-left: 0.4vw;
+  margin-bottom: 0.5vh;
+  padding-top: 5px;
+}
+
+.search-input {
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.search-button {
+  margin-top: 10px;
+  margin-left: 45%;
+  padding: 5px 10px;
+}
+
+.map-container {
+  margin-bottom: 10px;
+  width: 52.1vw;
+  height: 10vh;
+  min-height: 550px;
+  border: 5px solid darkslategray;
+  border-radius: 1px;
+}
+
+.popup-intro-container {
+  text-align: center;
+  padding-bottom: 13px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: rgba(47, 79, 79, 0.1);
+  border: 1px solid rgba(47, 79, 79, 0.1);
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.popup-text-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: rgba(47, 79, 79, 0.1);
+  border: 1px solid rgba(47, 79, 79, 0.1);
+  border-radius: 5px;
+}
+
+.popup-text {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 14px;
+}
+
+.student-grade {
+  margin-top: -18px;
+}
+
+.loading-container {
+  display: flex;
+  background-color: darkslategray;
+  padding: 80px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-radius: 5px;
+}
+
+.loading-text {
+  font-size: 32px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: white;
+}
