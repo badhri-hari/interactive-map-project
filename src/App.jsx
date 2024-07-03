@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -17,7 +17,6 @@ export default function App() {
   const [search, setSearch] = useState({ Name: "", StudentId: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const firstStudentRef = useRef(null);
 
   const fetchStudents = async (params = {}) => {
     setLoading(true);
@@ -37,7 +36,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchStudents();
+    fetchStudents(); // Fetch all students initially
   }, []);
 
   const handleSearch = () => {
@@ -60,12 +59,6 @@ export default function App() {
 
     return formattedValue;
   };
-
-  useEffect(() => {
-    if (students.length > 0 && firstStudentRef.current) {
-      firstStudentRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [students]);
 
   return (
     <>
@@ -138,7 +131,6 @@ export default function App() {
                 <Marker
                   key={index}
                   position={[student.latitude, student.longitude]}
-                  ref={index === 0 ? firstStudentRef : null}
                 >
                   <Popup>
                     <div className="popup-intro-container">
