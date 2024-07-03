@@ -89,15 +89,21 @@ export default function App() {
           />
           <input
             type="text"
-            placeholder="Address"
+            placeholder="Route"
             className="search-input"
-            onChange={(e) => setSearch({ ...search, Address: e.target.value })}
+            onChange={(e) => setSearch({ ...search, RouteNo: e.target.value })}
           />
           <input
             type="text"
             placeholder="Area"
             className="search-input"
             onChange={(e) => setSearch({ ...search, Area: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Address"
+            className="search-input"
+            onChange={(e) => setSearch({ ...search, Address: e.target.value })}
           />
           <br />
           <button className="search-button" onClick={handleSearch}>
