@@ -5,7 +5,6 @@ dotenv.config();
 
 const uri = process.env.MONGODB_URI;
 const dbName = process.env.DB_NAME;
-const apiKey = process.env.API_KEY;
 
 let cachedClient = null;
 
@@ -29,12 +28,6 @@ const connectToDatabase = async () => {
 export default async (req, res) => {
   if (req.method !== "GET") {
     res.status(405).json({ error: "Method not allowed" });
-    return;
-  }
-
-  const requestApiKey = req.headers["x-api-key"];
-  if (!requestApiKey || requestApiKey !== apiKey) {
-    res.status(401).json({ error: "Unauthorized" });
     return;
   }
 
