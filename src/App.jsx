@@ -88,11 +88,13 @@ export default function App() {
             onChange={(e) => setSearch({ ...search, Name: e.target.value })}
           />
           <input
-            type="text"
+            type="number"
             placeholder="Route"
             className="search-input"
+            max="9"
             onChange={(e) => setSearch({ ...search, RouteNo: e.target.value })}
           />
+
           <input
             type="text"
             placeholder="Area"

@@ -45,7 +45,7 @@ export default async (req, res) => {
       query.StudentId = { $regex: new RegExp(req.query.StudentId, "i") };
     }
     if (req.query.RouteNo) {
-      query.RouteNo = { $regex: new RegExp(`^${req.query.RouteNo}`, "i") };
+      query.RouteNo = { $regex: new RegExp(`^${req.query.RouteNo}$`, "i") };
     }
     if (req.query.Address) {
       query.Address = { $regex: new RegExp(req.query.Address, "i") };
