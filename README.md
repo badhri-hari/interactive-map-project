@@ -24,7 +24,7 @@ This project is an interactive web application designed to assist school bus dri
 
 * **App.css** : The CSS file for styling the application.
 * **App.jsx** : The main JavaScript file where the application logic and interactions are implemented.
-* **main.jsx** : Used to render the **App.js** into the DOM.
+* **main.jsx** : Used in conjunction with **index.html** to render the **App.jsx** into the DOM.
 
 ## Setup Instructions
 
