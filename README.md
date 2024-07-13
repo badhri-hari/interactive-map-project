@@ -1,4 +1,4 @@
-﻿# Interactive Student Map for School Bus Drivers
+﻿# Interactive Student Map
 
 ## Project Overview
 
@@ -23,15 +23,16 @@ This project is an interactive web application designed to assist school bus dri
 ## Project Structure
 
 * **App.css** : The CSS file for styling the application.
-* **App.js** : The main JavaScript file where the application logic and interactions are implemented.
+* **App.jsx** : The main JavaScript file where the application logic and interactions are implemented.
 * **main.jsx** : Used to render the **App.js** into the DOM.
 
 ## Setup Instructions
 
 1. Clone the repository from GitHub.
-2. Run `npm run dev` in the main directory.
-3. Navigate to **localhost:5173** in a browser.
-4. Ensure you have an active internet connection for Leaflet.js to load the map tiles.
+2. Run `npm install` in the terminal while in the main directory.
+3. Run `npm run dev` in the terminal while in the main directory.
+4. Navigate to **localhost:5173** in a browser.
+5. Ensure you have an active internet connection for Leaflet.js to load the map tiles.
 
 ## Usage Instructions
 
