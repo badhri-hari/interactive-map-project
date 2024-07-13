@@ -17,16 +17,24 @@ export default function App() {
   const [search, setSearch] = useState({ Name: "", StudentId: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [noStudentsFound, setNoStudentsFound] = useState(false);
 
   const fetchStudents = async (params = {}) => {
     setLoading(true);
+    setError(false);
+    setNoStudentsFound(false); // Reset the no students found state
     try {
       console.log("Fetching students with params:", params);
-      const response = await axios.get("/api/students", { params });
+      const response = await axios.get("http://localhost:5000/students", {
+        params,
+      });
       const sortedStudents = response.data.sort((a, b) =>
         a.Name.localeCompare(b.Name)
       );
       setStudents(sortedStudents);
+      if (sortedStudents.length === 0) {
+        setNoStudentsFound(true);
+      }
     } catch (error) {
       console.error("Error fetching student data:", error);
       setError(true);
@@ -91,10 +99,12 @@ export default function App() {
             type="number"
             placeholder="Route"
             className="search-input"
-            max="9"
-            onChange={(e) => setSearch({ ...search, RouteNo: e.target.value })}
+            min="1"
+            max="2"
+            onChange={(e) =>
+              setSearch({ ...search, RouteNo: Number(e.target.value) })
+            }
           />
-
           <input
             type="text"
             placeholder="Area"
@@ -113,7 +123,13 @@ export default function App() {
           </button>
           {error && (
             <div className="error-message">
-              There was an error. Please try again.
+              Couldn't connect to the database. Please check your internet
+              connection.
+            </div>
+          )}
+          {noStudentsFound && (
+            <div className="error-message">
+              No students found matching the search criteria.
             </div>
           )}
         </div>
