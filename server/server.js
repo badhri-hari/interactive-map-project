@@ -1,19 +1,20 @@
+// Importing packages.
 import express from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import cors from "cors";
 
-dotenv.config();
+dotenv.config(); // Initalizing the dotenv package so the server would be able to securely access the API keys.
 
-const app = express();
-app.use(cors());
+const app = express(); // Initalizing the express package.
+app.use(cors()); // Adding the cors package to the express app.
 
-const uri = process.env.MONGODB_URI;
-const dbName = process.env.DB_NAME;
+const uri = process.env.MONGODB_URI; // The link to the MongoDB Atlas database.
+const dbName = process.env.DB_NAME; // The name of the MongoDB Atlas database.
 
 let cachedClient = null;
 
-const connectToDatabase = async () => {
+const connectToDatabase = async () => { // Function to connect to the database.
   if (
     cachedClient &&
     cachedClient.topology &&
@@ -38,11 +39,9 @@ const connectToDatabase = async () => {
   }
 };
 
-app.use(cors());
-
-app.get("/students", async (req, res) => {
-  if (req.method !== "GET") {
-    res.status(405).json({ error: "Method not allowed" });
+app.get("/students", async (req, res) => { // API route for the frontend.
+  if (req.method !== "GET") { // Specifying the request type.
+    res.status(405).json({ error: "Method not allowed" }); // Only allows for GET requests to maintain data integrity (to prevent unauthorized changes to the database).
     return;
   }
 
@@ -52,20 +51,20 @@ app.get("/students", async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection("School_Transport");
 
-    let query = {};
-    if (req.query.Name) {
+    let query = {}; // Defining a query object to be sent to the database.
+    if (req.query.Name) { // Student name
       query.Name = { $regex: new RegExp(`^${req.query.Name}`, "i") };
     }
-    if (req.query.StudentId) {
+    if (req.query.StudentId) { // Student ID
       query.StudentId = { $regex: new RegExp(req.query.StudentId, "i") };
     }
-    if (req.query.RouteNo) {
+    if (req.query.RouteNo) { // Bus Route Number
       query.RouteNo = parseInt(req.query.RouteNo);
     }
-    if (req.query.Address) {
+    if (req.query.Address) { // Student address
       query.Address = { $regex: new RegExp(req.query.Address, "i") };
     }
-    if (req.query.Area) {
+    if (req.query.Area) {  // Student area
       query.Area = { $regex: new RegExp(`^${req.query.Area}`, "i") };
     }
 

@@ -1,9 +1,11 @@
+// Importing packages.
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
+// Specifying marker icon to show.
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -20,26 +22,30 @@ export default function App() {
   const [noStudentsFound, setNoStudentsFound] = useState(false);
 
   const fetchStudents = async (params = {}) => {
-    setLoading(true);
-    setError(false);
-    setNoStudentsFound(false); // Reset the no students found state
+    setLoading(true); // Starts displaying loading box.
+    setError(false); // Reset error state when searching for students.
+    setNoStudentsFound(false); // Reset the no students found state when searching for students.
+    
     try {
       console.log("Fetching students with params:", params);
       const response = await axios.get("http://localhost:5000/students", {
+        // Fetching students from server using the given search parameters.
         params,
       });
       const sortedStudents = response.data.sort((a, b) =>
         a.Name.localeCompare(b.Name)
       );
-      setStudents(sortedStudents);
+      setStudents(sortedStudents); // If no student found
       if (sortedStudents.length === 0) {
         setNoStudentsFound(true);
       }
+    
     } catch (error) {
       console.error("Error fetching student data:", error);
-      setError(true);
+      setError(true); // Shows error message when there is an error.
+    
     } finally {
-      setLoading(false);
+      setLoading(false); // Stops displaying loading box.
     }
   };
 
@@ -52,6 +58,7 @@ export default function App() {
   };
 
   const formatStudentId = (value) => {
+    // Ensures that the given student ID follows this format: AA-00
     const cleanValue = value
       .replace(/[^a-zA-Z0-9]/g, "")
       .substring(0, 4)
@@ -84,7 +91,7 @@ export default function App() {
             onChange={(e) =>
               setSearch({
                 ...search,
-                StudentId: formatStudentId(e.target.value),
+                StudentId: formatStudentId(e.target.value), // Applies formatting rule
               })
             }
           />
@@ -96,11 +103,11 @@ export default function App() {
             onChange={(e) => setSearch({ ...search, Name: e.target.value })}
           />
           <input
-            type="number"
+            type="number" // Only accepts number inputs.
             placeholder="Route"
             className="search-input"
-            min="1"
-            max="2"
+            min="1" // The minimum route number.
+            max="2" // The maximum route number (can be increased as more routes added).
             onChange={(e) =>
               setSearch({ ...search, RouteNo: Number(e.target.value) })
             }
@@ -141,7 +148,7 @@ export default function App() {
           </div>
         )}
         <MapContainer
-          center={[12.99520434846565, 80.25563741504301]}
+          center={[12.99520434846565, 80.25563741504301]} // To ensure that the map is centered on Chennai.
           zoom={10}
           className="map-container"
         >
