@@ -19,6 +19,8 @@ This project is an interactive web application designed to assist school bus dri
 * **CSS3** : For styling and responsive design.
 * **JavaScript (React.js)** : For dynamic functionality and interactive features.
 * **Leaflet.js** : For map integration and marker management.
+* **Axios:** For handling server requests from the frontend and to fetch data from the database.
+* **Express.js:** For working with APIs within the NodeJS framework.
 
 ## Project Structure
 
