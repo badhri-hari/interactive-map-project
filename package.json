@@ -34,7 +34,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.3.3"
   },
-  "description": "Interactive Student Map for School Bus Drivers: An application that allows school bus drivers to search and visualize student pickup points on a map. Features include search by name, grade, student ID, address, and area, with interactive pop-ups for detailed student information.",
+  "description": "Application that allows school bus drivers to search and visualize student pickup points on a map. Features include search by name, grade, student ID, address, and area, with interactive pop-ups for detailed student information.",
   "main": "main.jsx",
   "keywords": [],
   "author": "Badhri N Hari",
