@@ -38,7 +38,7 @@ This project is an interactive web application designed to assist school bus dri
 
 ## Usage Instructions
 
-1. Open the application in a web browser.
+1. Access the application in a web browser in the **localhost:5173** URL.
 2. Use the search bar to find students by name, grade, student ID, address, or area.
 3. Click on the markers on the map to view detailed information about each student.
 4. Utilize the map controls to zoom in and out or navigate to different areas.
@@ -53,4 +53,4 @@ This project provided practical experience in front-end web development, particu
 
 ## Contact Information
 
-For any inquiries or further information, please contact me. **Email** : [badhrihari123@gmail.com](mailto:badhrihari123@gmail.com)
+For any inquiries or further information, please contact me at [badhrihari123@gmail.com](mailto:badhrihari123@gmail.com).
