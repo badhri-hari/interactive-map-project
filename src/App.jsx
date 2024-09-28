@@ -20,16 +20,30 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [noStudentsFound, setNoStudentsFound] = useState(false);
+  const [showModal, setShowModal] = useState(false); // State for showing/hiding modal.
+  const [newStudent, setNewStudent] = useState({
+    Name: "",
+    StudentId: "",
+    RouteNo: "",
+    Area: "",
+    Address: "",
+    Pickup: "",
+    Drop: "",
+    Grade: "",
+    latitude: "",
+    longitude: "",
+    password: "",
+  });
+  const [addStudentError, setAddStudentError] = useState(false);
 
   const fetchStudents = async (params = {}) => {
     setLoading(true); // Starts displaying loading box.
     setError(false); // Reset error state when searching for students.
     setNoStudentsFound(false); // Reset the no students found state when searching for students.
-    
+
     try {
       console.log("Fetching students with params:", params);
-      const response = await axios.get("http://localhost:5000/students", {
-        // Fetching students from server using the given search parameters.
+      const response = await axios.get("/api/students", {
         params,
       });
       const sortedStudents = response.data.sort((a, b) =>
@@ -39,13 +53,11 @@ export default function App() {
       if (sortedStudents.length === 0) {
         setNoStudentsFound(true);
       }
-    
     } catch (error) {
       console.error("Error fetching student data:", error);
-      setError(true); // Shows error message when there is an error.
-    
+      setError(true);
     } finally {
-      setLoading(false); // Stops displaying loading box.
+      setLoading(false);
     }
   };
 
@@ -57,8 +69,35 @@ export default function App() {
     fetchStudents(search);
   };
 
+  const handleAddStudent = async () => {
+    // Form submission logic for adding a student
+    if (newStudent.password !== "badhri") {
+      setAddStudentError(true);
+      return;
+    }
+    try {
+      setAddStudentError(false);
+      setShowModal(false); // Close modal on successful addition
+      setNewStudent({
+        Name: "",
+        StudentId: "",
+        RouteNo: "",
+        Area: "",
+        Address: "",
+        Pickup: "",
+        Drop: "",
+        Grade: "",
+        latitude: "",
+        longitude: "",
+        password: "",
+      });
+      fetchStudents(); // Fetch the updated students
+    } catch (error) {
+      setAddStudentError(true); // Show error inside modal
+    }
+  };
+
   const formatStudentId = (value) => {
-    // Ensures that the given student ID follows this format: AA-00
     const cleanValue = value
       .replace(/[^a-zA-Z0-9]/g, "")
       .substring(0, 4)
@@ -82,6 +121,7 @@ export default function App() {
           <h1>School Transport Students Map</h1>
         </div>
         <div className="search-container">
+          {/* Search Inputs and Button */}
           <input
             type="text"
             placeholder="Student ID"
@@ -91,7 +131,7 @@ export default function App() {
             onChange={(e) =>
               setSearch({
                 ...search,
-                StudentId: formatStudentId(e.target.value), // Applies formatting rule
+                StudentId: formatStudentId(e.target.value),
               })
             }
           />
@@ -102,12 +142,12 @@ export default function App() {
             value={search.Name}
             onChange={(e) => setSearch({ ...search, Name: e.target.value })}
           />
+          {/* Other search inputs */}
           <input
-            type="number" // Only accepts number inputs.
+            type="number"
             placeholder="Route"
             className="search-input"
-            min="1" // The minimum route number.
-            max="2" // The maximum route number (can be increased as more routes added).
+            min="1"
             onChange={(e) =>
               setSearch({ ...search, RouteNo: Number(e.target.value) })
             }
@@ -124,22 +164,16 @@ export default function App() {
             className="search-input"
             onChange={(e) => setSearch({ ...search, Address: e.target.value })}
           />
-          <br />
           <button className="search-button" onClick={handleSearch}>
             Search
           </button>
-          {error && (
-            <div className="error-message">
-              Couldn't connect to the database. Please check your internet
-              connection.
-            </div>
-          )}
+          {error && <div className="error-message">Error fetching data</div>}
           {noStudentsFound && (
-            <div className="error-message">
-              No students found matching the search criteria.
-            </div>
+            <div className="error-message">No students found</div>
           )}
         </div>
+
+        {/* Map and Student Markers */}
         {loading && (
           <div className="loading-overlay">
             <div className="loading-container">
@@ -148,7 +182,7 @@ export default function App() {
           </div>
         )}
         <MapContainer
-          center={[12.99520434846565, 80.25563741504301]} // To ensure that the map is centered on Chennai.
+          center={[12.99520434846565, 80.25563741504301]}
           zoom={10}
           className="map-container"
         >
@@ -165,6 +199,7 @@ export default function App() {
                   position={[student.latitude, student.longitude]}
                 >
                   <Popup>
+                    {/* Popup content */}
                     <div className="popup-intro-container">
                       <p className="popup-text">
                         <strong>
@@ -206,6 +241,107 @@ export default function App() {
               )
           )}
         </MapContainer>
+
+        {/* Add Student Button */}
+        <button
+          className="add-student-button"
+          onClick={() => setShowModal(true)}
+        >
+          Add a Student
+        </button>
+
+        {/* Modal for Adding a Student */}
+        {showModal && (
+          <div className="modal-overlay" onClick={() => setShowModal(false)}>
+            <div
+              className="modal-container"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2>Add a New Student</h2>
+              <input
+                type="text"
+                placeholder="Name"
+                className="search-input"
+                value={newStudent.Name}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, Name: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Student ID"
+                className="search-input"
+                value={newStudent.StudentId}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, StudentId: e.target.value })
+                }
+              />
+              <input
+                type="number"
+                placeholder="Route No"
+                className="search-input"
+                value={newStudent.RouteNo}
+                min="1"
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, RouteNo: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Area"
+                className="search-input"
+                value={newStudent.Area}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, Area: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                className="search-input"
+                value={newStudent.Address}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, Address: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Pickup Time"
+                className="search-input"
+                value={newStudent.Pickup}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, Pickup: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Drop Time"
+                className="search-input"
+                value={newStudent.Drop}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, Drop: e.target.value })
+                }
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="search-input"
+                value={newStudent.password}
+                onChange={(e) =>
+                  setNewStudent({ ...newStudent, password: e.target.value })
+                }
+              />
+              {addStudentError && (
+                <div className="error-message">
+                  Error adding student. Please check the password.
+                </div>
+              )}
+              <button className="search-button" onClick={handleAddStudent}>
+                Add Student
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
