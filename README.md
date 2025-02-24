@@ -4,6 +4,8 @@
 
 This project is an interactive web application designed to assist school bus drivers in efficiently locating and managing student pickup points and route planning. By utilizing a map interface, drivers can search for student information by name, grade, student ID, address, and area. The application visualizes student locations on a map, allowing drivers to easily navigate and access relevant details for each student.
 
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
 ## Key Features
 
 * **Map Display** : The application features a dynamic map using Leaflet.js to visualize student locations.
