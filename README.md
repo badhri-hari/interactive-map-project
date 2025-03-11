@@ -1,6 +1,8 @@
-﻿# Interactive Student Map
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/73674c49-6a8a-4b86-ae39-b2111c736177" alt="project logo" height="150" width="300">
+</p>
 
-## Project Overview
+# Interactive Student Map
 
 This project is an interactive web application designed to assist school bus drivers in efficiently locating and managing student pickup points and route planning. By utilizing a map interface, drivers can search for student information by name, grade, student ID, address, and area. The application visualizes student locations on a map, allowing drivers to easily navigate and access relevant details for each student.
 
@@ -33,10 +35,9 @@ This project is an interactive web application designed to assist school bus dri
 ## Setup Instructions
 
 1. Clone the repository from GitHub.
-2. Run `npm install` in the terminal while in the main directory.
-3. Run `npm run dev` in the terminal while in the main directory.
-4. Navigate to **localhost:5173** in a browser.
-5. Ensure you have an active internet connection for Leaflet.js to load the map tiles.
+2. Run `npm install` and then `npm run dev` in the terminal while in the root.
+3. Navigate to **localhost:5173** in a browser.
+4. Ensure you have an active internet connection for Leaflet.js to load the map tiles.
 
 ## Usage Instructions
 
